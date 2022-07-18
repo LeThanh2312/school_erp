@@ -6,6 +6,7 @@ import 'package:school_erp/config/app_color.dart';
 import 'package:school_erp/config/app_constants.dart';
 import 'package:school_erp/config/app_image.dart';
 import 'package:school_erp/controllers/login/signin_acount_provider.dart';
+import 'package:school_erp/screens/home/home_screen.dart';
 import 'package:sizer/sizer.dart';
 
 import '../../../routes.dart';
@@ -19,8 +20,8 @@ class InputInfoLogin extends StatefulWidget {
 
 class _InputInfoLoginState extends State<InputInfoLogin> {
   bool showPassword = true;
-  bool _validateName = true;
-  bool _validatePassword = true;
+  bool _validateName = false;
+  bool _validatePassword = false;
   final TextEditingController _controllerName = TextEditingController();
   final TextEditingController _controllerPassword = TextEditingController();
 
@@ -75,7 +76,6 @@ class _InputInfoLoginState extends State<InputInfoLogin> {
             style: TextStyle(
               color: AppColors.black,
             ),
-            onChanged: (text) => setState(() => _validateName = false),
             decoration: InputDecoration(
               hintText: 'Mobile Number/Email',
               hintStyle: TextStyle(
@@ -108,7 +108,6 @@ class _InputInfoLoginState extends State<InputInfoLogin> {
           TextField(
             obscureText: showPassword,
             controller: _controllerPassword,
-            onChanged: (text) => setState(() => _validatePassword = false),
             style: TextStyle(
               color: AppColors.black,
             ),
@@ -147,7 +146,12 @@ class _InputInfoLoginState extends State<InputInfoLogin> {
             onTap: (){
               setState(() {
                 if(_controllerName.text.isNotEmpty || _controllerPassword.text.isNotEmpty){
-                  context.read<SignInAccountProvider>().requestSignIn(context,_controllerName.text,_controllerPassword.text);
+                  //context.read<SignInAccountProvider>().requestSignIn(context,_controllerName.text,_controllerPassword.text);
+                  Navigator.of(context).pushAndRemoveUntil<dynamic>(
+                      MaterialPageRoute<dynamic>(
+                          builder: (BuildContext context) =>
+                          const HomeScreen()),
+                          (Route<dynamic> route) => false);
                 }else if(_controllerName.text.isEmpty){
                   _validateName = true;
                 }else if(_controllerPassword.text.isEmpty){

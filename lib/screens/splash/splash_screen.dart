@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:school_erp/components/svg_widget.dart';
 import 'package:school_erp/config/app_color.dart';
 import 'package:school_erp/config/app_image.dart';
+import 'package:school_erp/screens/login/login_screen.dart';
 import 'package:sizer/sizer.dart';
 import '../../routes.dart';
 
@@ -19,7 +20,11 @@ class _SplashScreenState extends State<SplashScreen> {
     super.initState();
     Future.delayed(const Duration(seconds: 3), () {
       setState(() {
-        Navigator.of(context).pushNamed(Routes.login);
+        Navigator.of(context).pushAndRemoveUntil<dynamic>(
+            MaterialPageRoute<dynamic>(
+                builder: (BuildContext context) =>
+                const LoginScreen()),
+                (Route<dynamic> route) => false);
       });
     });
   }
