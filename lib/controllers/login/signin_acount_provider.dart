@@ -12,17 +12,16 @@ class SignInAccountProvider with ChangeNotifier{
 
   Future<void> requestSignIn(BuildContext context,String user,String password) async {
     dataLogin = await SignInReponsitoryIml().getSignIn(user,password);
-
+    print('login');
     if(dataLogin.token != null){
       Navigator.of(context).pushAndRemoveUntil<dynamic>(
           MaterialPageRoute<dynamic>(
               builder: (BuildContext context) =>
                   const HomeScreen()),
-
           (Route<dynamic> route) => false);
     } else{
       showSnackbar(context);
+      notifyListeners();
     }
-
   }
 }

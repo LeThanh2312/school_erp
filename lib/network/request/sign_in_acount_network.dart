@@ -1,6 +1,5 @@
 import 'package:dio/dio.dart';
 import 'package:school_erp/models/data_login.dart';
-import 'package:school_erp/network/api_public.dart';
 
 
 class SignInAcountNetwork{
